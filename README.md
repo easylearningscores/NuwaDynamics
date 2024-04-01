@@ -1,4 +1,4 @@
-# Note: You can use our Nuwa to help you discover the key parts in the Dynamic System by following the tutorial below, using the present simple tense.
+# Note: You can use our Nuwa to help you discover the key parts in the Dynamic System by following the tutorial below.
 
 ### (1) Discovering ``` python nvwa_upstream_pretrain.py ```
 The following hyperparameters are modified to select the appropriate data dimensions for the self-supervised reconstruction process.
