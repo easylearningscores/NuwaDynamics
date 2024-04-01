@@ -63,3 +63,48 @@ if __name__ == "__main__":
 
 
 ```
+
+### (3) Data augmentation 
+
+In the folder attention_map, we give an example of data augmentation, combined with the paper, to find out the top-ordered and bottom-ordered patch regions, and we use top-down and bottom-up Mixup for data augmentation strategy for the bottom-ordered patch regions.
+
+```python
+import numpy as np
+
+def mixup_patch(input_frame, min_attention_position, alpha=0.5):
+    """
+    Performs mixup enhancement on the minimum attention weight patch of the specified image and its right-hand patch.
+    :param input_frame: single image data, assuming shape [C, H, W].
+    :param min_attention_position: The position of the minimum attention weight patch, in the form (row, col).
+    :param alpha: The mixup's mixing ratio.
+    :return: The enhanced image.
+    """
+    patch_size = 16 
+    row, col = min_attention_position
+    start_x = col * patch_size
+    start_y = row * patch_size
+    
+    if start_x + patch_size < input_frame.shape[2] - patch_size:
+        target_patch = input_frame[:, start_y:start_y+patch_size, start_x:start_x+patch_size]
+        right_patch = input_frame[:, start_y:start_y+patch_size, start_x+patch_size:start_x+2*patch_size]
+        mixed_patch = alpha * target_patch + (1 - alpha) * right_patch
+        input_frame[:, start_y:start_y+patch_size, start_x:start_x+patch_size] = mixed_patch
+    
+    return input_frame
+
+
+input_frame = input_frames[0] 
+min_attention_position = (min_attention_positions[0][0], min_attention_positions[1][0]) 
+enhanced_frame = mixup_patch(input_frame, min_attention_position, alpha=0.5)
+print(enhanced_frame.reshape(10, 1, 64, 64).shape)
+```
+
+
+
+
+
+
+
+
+
+
