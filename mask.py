@@ -48,7 +48,7 @@ def mixup_region(image_array, x, y, block_size):
     return image_array
 
 # 加载注意力映射和图片
-attention_file_path = './data/all_attention_maps3.npy'#833, 10, 1, 64, 64
+attention_file_path = './data/all_attention_maps.npy'#833, 10, 1, 64, 64
 attention_map = np.load(attention_file_path, allow_pickle=True)
 
 image_file_path = './data/SEVIR_IR069_STORMEVENTS_2018_0101_0630.npy'# 833, 20, 128, 128
@@ -91,4 +91,4 @@ for batch_attention_maps, image_array in zip(attention_map, images):
 # 将处理后的图像数组保存到新的 .npy 文件
 processed_images = np.array(processed_images)
 print(processed_images.shape)
-np.save('./data/mask3.npy', processed_images)
+np.save('./data/mask.npy', processed_images)
