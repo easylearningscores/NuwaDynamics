@@ -17,7 +17,10 @@ class VilDataset(Dataset):
 
         data = []
         for file in npy:
-            data.append(np.load(f'{root}/{file}'))
+            data1 = np.load(f'{root}/{file}')
+            print("data1: ", data1.shape)
+            cut = data1.shape[0]
+            data.append(data1[:cut // 10])
 
         self.data = np.concatenate(data)
         #N, L, H, W = self.data.shape
