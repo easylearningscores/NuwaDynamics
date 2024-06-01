@@ -11,7 +11,7 @@ class VilDataset(Dataset):
     def __init__(self, train=True, root='./data', transform=None):
         super().__init__()
         if train:
-            npy = ['SEVIR_IR069_STORMEVENTS_2018_0101_0630.npy', 'SEVIR_IR069_STORMEVENTS_2018_0701_1231.npy']
+            npy = ['SEVIR_IR069_STORMEVENTS_2018_0101_0630.npy', 'mask.npy']
         else:
             npy = ['SEVIR_IR069_RANDOMEVENTS_2018_0101_0430.npy']
 
